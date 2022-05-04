@@ -5,7 +5,9 @@ import pprint
 from product.models import Product
 # to convert model ins into dict
 from django.forms.models import model_to_dict
-
+# to allow the post method
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 def api_home(request):
     # request body data
@@ -37,3 +39,21 @@ def get_random_product(request):
     if ran_product:
         data = model_to_dict(ran_product)
     return JsonResponse(data)
+
+# version 1
+# @api_view(['POST'])
+# def add_product(request):
+#     out = {'msg': 'You GET Request'}
+#     if request.method == 'POST':
+#         out = {'msg': 'You POST Request'}
+#     return JsonResponse(out)
+
+# version 1
+@api_view(['POST'])
+def add_product(request):
+    out = {'msg': 'You GET Request'}
+    status = 200
+    if request.method == 'POST':
+        out = {'msg': 'You POST Request'}
+        status = 400
+    return Response(out, status)
