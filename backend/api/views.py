@@ -48,15 +48,15 @@ def api_home(request):
 #         out = {'msg': 'You POST Request'}
 #     return JsonResponse(out)
 
-# version 1
-@api_view(['POST'])
-def add_product(request):
-    out = {'msg': 'You GET Request'}
-    status = 200
-    if request.method == 'POST':
-        out = {'msg': 'You POST Request'}
-        status = 400
-    return Response(out, status) 
+# # version 1
+# @api_view(['POST'])
+# def add_product(request):
+#     out = {'msg': 'You GET Request'}
+#     status = 200
+#     if request.method == 'POST':
+#         out = {'msg': 'You POST Request'}
+#         status = 400
+#     return Response(out, status) 
 
 from product.serializers import ProductSerializer
 @api_view(['GET'])
@@ -67,3 +67,17 @@ def get_random_product(request, *args, **kwargs):
         # data = model_to_dict(ran_product, fields=['id', 'title', 'ten_sales'])
         data = ProductSerializer(ran_product).data
     return Response(data)
+
+
+# version 2
+@api_view(['POST'])
+def add_product(request):
+    # data = {
+    #     'msg': 'Not Worked'
+    # }
+    serializer = ProductSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        instance = serializer.save()
+        print(instance)
+        data = serializer.data
+        return Response(data)
