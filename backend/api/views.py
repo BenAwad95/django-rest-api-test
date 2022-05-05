@@ -33,12 +33,12 @@ def api_home(request):
     # return JsonResponse({'massage':'Hello and welcome to our API django app'})
     return JsonResponse(body_data)
 
-def get_random_product(request):
-    ran_product = Product.objects.all().order_by('?').first()
-    data = {}
-    if ran_product:
-        data = model_to_dict(ran_product)
-    return JsonResponse(data)
+# def get_random_product(request):
+#     ran_product = Product.objects.all().order_by('?').first()
+#     data = {}
+#     if ran_product:
+#         data = model_to_dict(ran_product)
+#     return JsonResponse(data)
 
 # version 1
 # @api_view(['POST'])
@@ -56,4 +56,14 @@ def add_product(request):
     if request.method == 'POST':
         out = {'msg': 'You POST Request'}
         status = 400
-    return Response(out, status)
+    return Response(out, status) 
+
+from product.serializers import ProductSerializer
+@api_view(['GET'])
+def get_random_product(request, *args, **kwargs):
+    ran_product = Product.objects.all().order_by('?').first()
+    data = {}
+    if ran_product:
+        # data = model_to_dict(ran_product, fields=['id', 'title', 'ten_sales'])
+        data = ProductSerializer(ran_product).data
+    return Response(data)
