@@ -17,11 +17,11 @@ endpint4 = 'http://localhost:8000/add-product/'
 # print(data)
 
 #? ADD PRODUCT INTO DATABASE OF DJANGO APP
-post_res = requests.post(endpint4, json={
-    'title': 'Cap',
-    'content': 'Big size cap',
-    'price': 'ee'
-})
+# post_res = requests.post(endpint4, json={
+#     'title': 'Cap',
+#     'content': 'Big size cap',
+#     'price': 'ee'
+# })
 
-print(post_res.status_code)
-print(json.loads(post_res.text))
+# print(post_res.status_code)
+# print(json.loads(post_res.text))
