@@ -26,26 +26,26 @@ import json, requests
 
 # create of product
 # ------
-# endpoint = 'http://localhost:8000/products/create/'
-# new_product_data ={
-#     'title': 'Pencil',
-#     'price': 2.99,
-#     'content': 'Stay for long peried of time'
-# }
-# post_respose = requests.post(endpoint, json=new_product_data)
-# print(post_respose.status_code)
-# print(post_respose.text)
+endpoint = 'http://localhost:8000/products/create/'
+new_product_data ={
+    'title': 'Pencil',
+    'price': 2.99,
+    'content': 'Stay for long peried of time'
+}
+post_respose = requests.post(endpoint, json=new_product_data)
+print(post_respose.status_code)
+print(post_respose.text)
 # # ------
 
-# create of product
+# Update of product
 # ------
-endpoint = 'http://localhost:8000/products/update/1'
-new_product_data ={
-    'title': 'UPDATE',
-    'price': 'err',
-    'content': 'THIS PRODUCT HAS BEEN UPDATED'
-}
-put_respose = requests.put(endpoint, json=new_product_data)
-print(put_respose.status_code)
-print(put_respose.text)
+# endpoint = 'http://localhost:8000/products/update/1'
+# new_product_data ={
+#     'title': 'UPDATE',
+#     'price': 'err',
+#     'content': 'THIS PRODUCT HAS BEEN UPDATED'
+# }
+# put_respose = requests.put(endpoint, json=new_product_data)
+# print(put_respose.status_code)
+# print(put_respose.text)
 # ------
