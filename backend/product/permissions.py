@@ -2,7 +2,7 @@ from rest_framework import permissions
 
 
 class IsStaffEditorPermission(permissions.DjangoModelPermissions):
-    #! This dict cover everythings you needs, you do not need for any of settings
+    #! This dict cover everythings you needs, you do not need for any of settings.
     perms_map = {
         'GET': ['%(app_label)s.view_%(model_name)s'],
         'OPTIONS': [],

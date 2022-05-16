@@ -37,7 +37,10 @@ class ProductDestroyAPIView(DestroyAPIView):
 class ProductCreateAPIView(CreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    authentication_classes = [authentication.SessionAuthentication]
+    authentication_classes = [
+        authentication.SessionAuthentication,
+        authentication.TokenAuthentication
+    ]
     # permission_classes = [permissions.IsAdminUser] #IsAdminUser means is staff users
     permission_classes = [IsStaffEditorPermission]
 
