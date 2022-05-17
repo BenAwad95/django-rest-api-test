@@ -19,6 +19,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 urlpatterns = [
     path('auth/', obtain_auth_token),
     path('', include('api.urls')),
+    path('api-v2/', include('cfehome.routers')),
     path('products/', include('product.urls')),
     path('admin/', admin.site.urls)
 ]
