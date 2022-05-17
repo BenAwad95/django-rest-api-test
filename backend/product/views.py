@@ -3,53 +3,58 @@ from rest_framework.generics import RetrieveAPIView, ListAPIView, CreateAPIView,
 
 from .models import Product
 from .serializers import ProductSerializer
-from .permissions import IsStaffEditorPermission
+from .mixins import StaffEditorPermissionMixin
 
 
-
-class ProductRetrieveAPIView(RetrieveAPIView):
+class ProductRetrieveAPIView(
+    StaffEditorPermissionMixin,
+    RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    authentication_classes = [authentication.SessionAuthentication]
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # WE DON'T NEED IT ANYMORE AFTER WE SET THE REST FRAMEWORK AT SETTINGS
+    # authentication_classes = [authentication.SessionAuthentication]
 
 
 
-class ProductListAPIView(ListAPIView):
+class ProductListAPIView(
+    StaffEditorPermissionMixin,
+    ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    authentication_classes = [authentication.SessionAuthentication]
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    # permission_classes = [permissions.DjangoModelPermissions]
-    permission_classes = [IsStaffEditorPermission]
+    # WE DON'T NEED IT ANYMORE AFTER WE SET THE REST FRAMEWORK AT SETTINGS
+    # authentication_classes = [authentication.SessionAuthentication]
 
 
 
 
-class ProductDestroyAPIView(DestroyAPIView):
+class ProductDestroyAPIView(
+    StaffEditorPermissionMixin,
+    DestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    authentication_classes = [authentication.SessionAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    # WE DON'T NEED IT ANYMORE AFTER WE SET THE REST FRAMEWORK AT SETTINGS
+    # authentication_classes = [authentication.SessionAuthentication]
 
 
 
-class ProductCreateAPIView(CreateAPIView):
+class ProductCreateAPIView(
+    StaffEditorPermissionMixin,
+    CreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    authentication_classes = [
-        authentication.SessionAuthentication,
-        authentication.TokenAuthentication
-    ]
-    # permission_classes = [permissions.IsAdminUser] #IsAdminUser means is staff users
-    permission_classes = [IsStaffEditorPermission]
+
+    # edit before save 
+    # def perform_create(self, serializer):
+        # some_filed = serializer.validated_data.get('title')
+        # serializer.save(some_field = form_field)
 
 
 
-
-class ProductUpdateAPIView(UpdateAPIView):
+class ProductUpdateAPIView(
+    StaffEditorPermissionMixin,
+    UpdateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    authentication_classes = [authentication.SessionAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    # WE DON'T NEED IT ANYMORE AFTER WE SET THE REST FRAMEWORK AT SETTINGS
+    # authentication_classes = [authentication.SessionAuthentication]
 
